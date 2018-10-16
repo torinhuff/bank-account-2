@@ -1,73 +1,73 @@
-//business logic
-function Contact(first, last) {
-  this.firstName = first;
-  this.lastName = last;
-  this.addresses = [];
-}
-
-function Address(street, city, state) {
-  this.street = street;
-  this.city = city;
-  this.state = state;
-}
-
-Contact.prototype.fullName = function() {
-  return this.firstName + " " + this.lastName;
-}
+// //business logic
+// function newAccount(name, deposit) {
+//   this.fullName = name;
+//   this.initialDeposit = deposit;
+// }
+//
+// function moneyTransfer(plus, minus) {
+//   this.deposit = plus;
+//   this.withdrawl = minus;
+// debugger
+// }
+//
+// newAccount.prototype.adjust = function(adjustment) {
+//    this.initialDeposit = this.initialDeposit + adjustment;
+//  };
 
 // user interface logic
 $(document).ready(function() {
 
-  $("#add-address").click(function() {
-    $("#new-addresses").append('<div class="new-address">' +
-                                 '<div class="form-group">' +
-                                   '<label for="new-street">Street</label>' +
-                                   '<input type="text" class="form-control new-street">' +
-                                 '</div>' +
-                                 '<div class="form-group">' +
-                                   '<label for="new-city">City</label>' +
-                                   '<input type="text" class="form-control new-city">' +
-                                 '</div>' +
-                                 '<div class="form-group">' +
-                                   '<label for="new-state">State</label>' +
-                                   '<input type="text" class="form-control new-state">' +
-                                 '</div>' +
-                               '</div>');
-  });
-
-  $("form#new-contact").submit(function(event) {
+  $("button#make-account").click(function(event) {
+    $("form#new-account").submit(function(event){
     event.preventDefault();
-
-    var inputtedFirstName = $("input#new-first-name").val();
-    var inputtedLastName = $("input#new-last-name").val();
-    var newContact = new Contact(inputtedFirstName, inputtedLastName);
-
-    $(".new-address").each(function() {
-      var inputtedStreet = $(this).find("input.new-street").val();
-      var inputtedCity = $(this).find("input.new-city").val();
-      var inputtedState = $(this).find("input.new-state").val();
-      var newAddress = new Address(inputtedStreet, inputtedCity, inputtedState)
-      newContact.addresses.push(newAddress)
-    });
-
-    $("ul#contacts").append("<li><span class='contact'>" + newContact.fullName() + "</span></li>");
-
-    $(".contact").last().click(function() {
-      $("#show-contact").show();
-      $("#show-contact h2").text(newContact.fullName());
-      $(".first-name").text(newContact.firstName);
-      $(".last-name").text(newContact.lastName);
-      $("ul#addresses").text("");
-      newContact.addresses.forEach(function(address) {
-        $("ul#addresses").append("<li>" + address.street + ", " + address.city + " " + address.state + "</li>");
-      });
-    });
-
-    $("input#new-first-name").val("");
-    $("input#new-last-name").val("");
-    $("input.new-street").val("");
-    $("input.new-city").val("");
-    $("input.new-state").val("");
-
   });
-});
+
+  function newAccount(name, deposit) {
+    this.fullName = name;
+    this.initialDeposit = deposit;
+  }
+
+  newAccount.prototype.adjust = function(adjustment) {
+     this.initialDeposit = this.initialDeposit + adjustment;
+   };
+// debugger
+    var inputtedName = $("input#new-name").val();
+    var inputtedInitial = parseInt($("input#initial-deposit").val());
+    newCustomer = new newAccount(inputtedName, inputtedInitial);
+
+    $("#show-accounts").show();
+    $("#account-name").text(newCustomer.fullName);
+    $("#balance").text(newCustomer.initialDeposit);
+  });
+  $("button#submit").click(function(){
+    $("form#new-transaction").submit(function(event){
+      event.preventDefault();
+  });
+// debugger
+    // $(".new-transfer").each(function() {
+      var inputtedDeposit = parseInt($("input#new-deposit").val());
+      var inputtedWithdrawal = parseInt($("input#new-withdrawal").val());
+      var currentBalance = inputtedDeposit - inputtedWithdrawal;
+      newCustomer.adjust(currentBalance);
+      $("#balance").text(newCustomer.initialDeposit)
+
+      // var newBalance = new moneyTransfer(inputtedDeposit, inputtedWithdrawal)
+      // newAccount.balance.push(newBalance)
+    });
+
+    // $("ul#current").append("<li><span class='contact'>" + newAccount.inputtedName() + newAccount.inputtedInitial() +  "</span></li>");
+    //
+    // $(".contact").last().click(function() {
+    //   $("#show-accounts").show();
+    //   $("#show-accounts h2").text(initialAccount.fullName());
+    //   $(".account-name").text(initialAccount.fullName);
+    //   $(".balance").text(initialAccount.initialDeposit);
+    //   $("ul#current").text("");
+      // newContact.addresses.forEach(function(address) {
+      //   $("ul#addresses").append("<li>" + address.street + ", " + address.city + " " + address.state + "</li>");
+      // });
+    });
+
+    // $("input#initial-deposit").val("");
+    // $("input#new-deposit").val("");
+    // $("input.new-withdrawal").val("");
